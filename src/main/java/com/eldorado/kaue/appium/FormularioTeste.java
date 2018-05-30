@@ -73,6 +73,8 @@ public class FormularioTeste {
 	    String text = driver.findElement(By.xpath("//android.widget.Spinner/android.widget.TextView")).getText();
 	    Assert.assertEquals("PS4", text);
 	    
+	    //testing eclipse settings
+	    
 	    driver.quit();
 	}
 
