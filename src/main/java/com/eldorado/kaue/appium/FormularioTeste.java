@@ -11,14 +11,12 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-//import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class FormularioTeste {
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void devePreencherCampoTexto() throws MalformedURLException {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -46,7 +44,6 @@ public class FormularioTeste {
 	    driver.quit();
 	}
 	
-	@SuppressWarnings("deprecation")
 	@Test
 	public void deveInteragirComCombo() throws MalformedURLException {
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
@@ -72,9 +69,7 @@ public class FormularioTeste {
 	    //verificar a opcao selecionada
 	    String text = driver.findElement(By.xpath("//android.widget.Spinner/android.widget.TextView")).getText();
 	    Assert.assertEquals("PS4", text);
-	    
-	    //testing eclipse settings
-	    
+	    	    
 	    driver.quit();
 	}
 
