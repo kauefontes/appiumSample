@@ -12,6 +12,8 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.eldorado.kaue.appium.core.DriverFactory;
+
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
@@ -22,23 +24,16 @@ public class FormularioTeste {
 	private AndroidDriver<MobileElement> driver;
 	
 	@Before
-	private void inicializarAppium() throws MalformedURLException {
-		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-		desiredCapabilities.setCapability("platformName", "Android");
-		desiredCapabilities.setCapability("deviceName", "NZAA470170");
-		desiredCapabilities.setCapability("automationName", "uiautomator2");
-	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\kaue.pereira\\eclipse-workspace\\AppiumTeste\\src\\main\\resources\\CTAppium-1-1.apk");
-	    //desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\kauef\\eclipse-workspace\\appiumSample\\src\\main\\resources\\CTAppium-1-1.apk");
-	    
-	    driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
-	    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
+	public void inicializarAppium() throws MalformedURLException {
+		driver = DriverFactory.getDriver();
+				
 		//Selecionar formulario
 		driver.findElement(By.xpath("//*[@text='Formulário']")).click();
 	}
+	
 	@After
-	private void tearDown() {
-		driver.quit();
+	public void tearDown() {
+		DriverFactory.killDriver();
 	}
 	
 	@Test
@@ -93,8 +88,6 @@ public class FormularioTeste {
 		List<MobileElement> botoesEncontrados = driver.findElements(By.className("android.widget.Button"));
 		botoesEncontrados.get(0).click();		
 		
-		//asserts
-		//Assert.assertEquals("Nome: "+ name, text);		
 	}
 
 
