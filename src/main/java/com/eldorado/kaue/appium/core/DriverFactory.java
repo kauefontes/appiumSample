@@ -1,5 +1,6 @@
 package com.eldorado.kaue.appium.core;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -20,14 +21,19 @@ public class DriverFactory {
 		}
 		return driver;
 	}
+	private static String catchapkPath() {
+		ClassLoader classLoader = DriverFactory.class.getClassLoader();
+		File file = new File(classLoader.getResource("CTAppium-1-1.apk").getFile());
+		return file.getAbsolutePath();		
+		
+	}
 	
-	private static void createDriver() {
+	private static void createDriver() {		
 		DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
 		desiredCapabilities.setCapability("platformName", "Android");
 		desiredCapabilities.setCapability("deviceName", "NZAA470170");
 		desiredCapabilities.setCapability("automationName", "uiautomator2");
-	    //desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\kaue.pereira\\eclipse-workspace\\AppiumTeste\\src\\main\\resources\\CTAppium-1-1.apk");
-	    desiredCapabilities.setCapability(MobileCapabilityType.APP, "C:\\Users\\kauef\\eclipse-workspace\\appiumSample\\src\\main\\resources\\CTAppium-1-1.apk");
+		desiredCapabilities.setCapability(MobileCapabilityType.APP, catchapkPath());
 	    
 	    try {
 			driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"), desiredCapabilities);
